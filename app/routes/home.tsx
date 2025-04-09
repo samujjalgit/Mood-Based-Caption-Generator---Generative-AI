@@ -41,15 +41,15 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-   [#302b63] to-[#24243e] text-white flex items-center justify-center    px-4 py-10 font-sans relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient    (ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20    via-purple-900/10 to-transparent blur-3xl z-0" />
-      
+
       <div className="relative z-10 backdrop-blur-lg bg-white/5 p-8     rounded-3xl border border-white/10 shadow-xl w-full max-w-5xl">
         <h1 className="text-4xl sm:text-5xl font-bold text-center     text-indigo-300 mb-2 tracking-wide drop-shadow">
-          ✨ CaptionCraft ✨
+          CaptionCraft 🪄
         </h1>
         <p className="mb-8 text-zinc-300 text-center text-sm    sm:text-base max-w-3xl mx-auto">
           Upload an image, choose a tone, and let AI drop a 🔥 caption    for your feed.
         </p>
-      
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <input
@@ -58,7 +58,7 @@ export default function Home() {
               onChange={handleImageUpload}
               className="w-full px-4 py-3 bg-black/30 text-white    rounded-xl border border-zinc-600 cursor-pointer file:mr-4    file:py-2 file:px-4 file:rounded-full file:border-0    file:text-sm file:font-semibold file:bg-indigo-500   file:text-white hover:file:bg-indigo-600"
             />
-    
+
             <select
               value={tone}
               onChange={(e) => setTone(e.target.value)}
@@ -68,8 +68,10 @@ export default function Home() {
               <option value="classic">Classic ✨</option>
               <option value="savage">Savage 😎</option>
               <option value="poetic">Poetic 🎭</option>
+              <option value="quote">Quote 🎭</option>
+              <option value="shayari">Shayari 🎭</option>
             </select>
-      
+
             <button
               onClick={generateCaption}
               disabled={loading}
@@ -78,7 +80,7 @@ export default function Home() {
               {loading ? 'Cooking Caption...' : 'Generate Caption'}
             </button>
           </div>
-      
+
           {preview && (
             <img
               src={preview}
@@ -113,7 +115,7 @@ export default function Home() {
             ) : (
               <p className="text-lg italic text-center text-zinc-200">    “{caption}”</p>
             )}
-    
+
             <button
               onClick={() => navigator.clipboard.writeText(caption)}
               className="mt-2 text-sm text-indigo-400 hover:underline     block text-center"

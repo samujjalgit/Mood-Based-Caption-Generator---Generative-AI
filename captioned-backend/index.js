@@ -16,7 +16,8 @@ const upload = multer({ dest: 'uploads/' });
 
 // 🔥 Use the newer model: gemini-1.5-pro or gemini-1.5-flash
 const model = genAI.getGenerativeModel({
-  model: 'models/gemini-1.5-pro', // You can also try: gemini-1.5-flash
+//   model: 'models/gemini-1.5-pro', // You can also try: gemini-1.5-flash
+model: 'models/gemini-2.0-flash',
 });
 
 app.post('/api/caption', upload.single('image'), async (req, res) => {
@@ -25,7 +26,21 @@ app.post('/api/caption', upload.single('image'), async (req, res) => {
     const tone = req.body.tone || 'funny';
     const imageData = await fs.promises.readFile(filePath);
 
-    const prompt = `Generate a ${tone} Instagram caption for this image. Be concise and catchy.`;
+    const prompt = `Generate a ${tone} Instagram caption for this image. Be concise and catchy. Do not use bold words. And each captions should have one line gap in between. Give 1-2 liner response. Avoid any explaination or Intro text like "here are some examples etc"`;
+    // const prompt = `You are a creative caption writer for social media. Based on the uploaded image, generate 3 unique Instagram captions in the "${tone}" tone. 
+
+    //     Use this template - 
+
+    //     Caption 1 - " The first caption"
+    //     Caption 2 - "The 2nd Caption"
+    //     Caption 3 - "The 3rd Caption"
+
+    //     Do not use bold words. And each captions should have one line gap in between
+        
+    //     Tone: ${tone}
+        
+    //     Do not add any explanation or intro text. Just return the 3 formatted captions.`;
+
 
     const result = await model.generateContent({
       contents: [{
